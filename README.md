@@ -1,6 +1,6 @@
 # Nort-Sun GitHub Banner Forge
 <p align="center">
-  <img src="https://banner-forge-api.vercel.app/api?type=wave&color=0%3A1a0a0a%2C100%3Afbbf24&height=220&section=header&text=Nort-Sun+GitHub+Banner+Forge&fontSize=44&fontAlign=50&fontAlignY=50&fontColor=ffffff&fontFamily=Orbitron" alt="Header banner" width="100%"/>
+  <img src="https://banner-forge-api.vercel.app/api?type=waving&color=0%3A050816%2C100%3A0ea5e9&height=220&section=header&text=Nort-Sun+GitHub+Banner+Forge&fontSize=44&fontAlign=50&fontAlignY=50&fontColor=ffffff&fontFamily=Orbitron" alt="Header banner" width="100%"/>
 </p>
 
 Design a README banner — pick a shape, palette, and font, then export a crisp PNG, GIF, or SVG.
