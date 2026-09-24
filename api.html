@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nort-Sun render</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0e0e12;color:#f2f2f4;font-family:system-ui,sans-serif;padding:20px}
+.bar{max-width:1200px;margin:0 auto 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar h1{font-size:1rem;margin:0 8px 0 0}
+.bar button{background:#d6ff4b;border:none;color:#141417;font-weight:700;padding:9px 14px;border-radius:3px;cursor:pointer;font-size:.8rem}
+.bar a{color:#d6ff4b;font-size:.82rem}
+.note{max-width:1200px;margin:0 auto 14px;color:#9aa0b0;font-size:.8rem}
+.stage{max-width:1200px;margin:0 auto;background:#000;border:1px solid #333}
+.stage svg{width:100%;height:auto;display:block}
+code{color:#d6ff4b}
+</style>
+</head>
+<body>
+<div class="bar"><h1>Nort-Sun render</h1><button id="dl">Download SVG</button><button id="lk">Copy link</button><a href="index.html">Open Studio</a></div>
+<div class="note" id="note"></div>
+<div class="stage" id="stage"></div>
+<script>
+var BF_DEPS={};
+var BF_PJ=[
+  {
+    "idx": 0,
+    "color": "A3DCBE",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 1,
+    "color": "E3A6AE",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 2,
+    "color": "FD866E",
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 3,
+    "color": "F8E2CF",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 4,
+    "color": "6FC7E1",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 5,
+    "color": "FFA883",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 6,
+    "color": "CDE4AD",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 7,
+    "color": "97DBAE",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 8,
+    "color": "7BD1D2",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 9,
+    "color": "75BDE0",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 10,
+    "color": "C3E5AE",
+    "text": "f7f5f5",
+    "textBg": "363636"
+  },
+  {
+    "idx": 11,
+    "color": "F1E1A6",
+    "text": "f7f5f5",
+    "textBg": "363636"
+  },
+  {
+    "idx": 12,
+    "color": "F4BBBB",
+    "text": "f7f5f5",
+    "textBg": "363636"
+  },
+  {
+    "idx": 13,
+    "color": "FCB6D0",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 14,
+    "color": "B6DCB6",
+    "text": "363636",
+    "textBg": "f0f0f0"
+  },
+  {
+    "idx": 15,
+    "color": "C7A48B",
+    "text": "f7f5f5",
+    "textBg": "363636"
+  },
+  {
+    "idx": 16,
+    "color": "C6BBB7",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 17,
+    "color": "F7EFE9",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 18,
+    "color": "76819C",
+    "text": "363636",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 19,
+    "color": "364765",
+    "text": "FAF7F5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 20,
+    "color": "B97A63",
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 21,
+    "color": "F4D47B",
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 22,
+    "color": "1C768F",
+    "text": "032539",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 23,
+    "color": "FA991C",
+    "text": "032539",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 24,
+    "color": "FFD159",
+    "text": "3E3C3C",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 25,
+    "color": "FF6F3C",
+    "text": "FCE2CF",
+    "textBg": "FF6F3C"
+  },
+  {
+    "idx": 26,
+    "color": "9ACB34",
+    "text": "41544c",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 27,
+    "color": "42564F",
+    "text": "C0EB6A",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 28,
+    "color": "3A4A51",
+    "text": "4A675A",
+    "textBg": "f7f5f5"
+  }
+]
+;
+var BF_GJ=[
+  {
+    "idx": 0,
+    "color": {
+      "0": "F8B195",
+      "50": "F67280",
+      "100": "C06C84"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 1,
+    "color": {
+      "0": "feac5e",
+      "50": "c779d0",
+      "100": "4bc0c8"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 2,
+    "color": {
+      "0": "43cea2",
+      "100": "185a9d"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 3,
+    "color": {
+      "0": "c2e59c",
+      "100": "64b3f4"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 4,
+    "color": {
+      "0": "00C9FF",
+      "100": "92FE9D"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 5,
+    "color": {
+      "0": "e53935",
+      "100": "e35d5b"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 6,
+    "color": {
+      "0": "fc00ff",
+      "100": "00dbde"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 7,
+    "color": {
+      "0": "ff6a00",
+      "100": "f720db"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+
+  {
+    "idx": 8,
+    "color": {
+      "0": "004FF9",
+      "100": "FFF94C"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 9,
+    "color": {
+      "0": "7b4397",
+      "100": "dc2430"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 10,
+    "color": {
+      "0": "833ab4",
+      "50": "fd1d1d",
+      "100": "fcb045"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 11,
+    "color": {
+      "0": "D38312",
+      "100": "A83279"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 12,
+    "color": {
+      "0": "00c6ff",
+      "100": "0072ff"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 13,
+    "color": {
+      "0": "780206",
+      "100": "061161"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 14,
+    "color": {
+      "0": "B993D6",
+      "100": "8CA6DB"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 15,
+    "color": {
+      "0": "ddd6f3",
+      "100": "faaca8"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 16,
+    "color": {
+      "0": "C04848",
+      "100": "480048"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 17,
+    "color": {
+      "0": "3CA55C",
+      "100": "B5AC49"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 18,
+    "color": {
+      "0": "9796f0",
+      "100": "fbc7d4"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 19,
+    "color": {
+      "0": "2193b0",
+      "100": "6dd5ed"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 20,
+    "color": {
+      "0": "4568dc",
+      "100": "b06ab3"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 21,
+    "color": {
+      "0": "13547a",
+      "100": "80d0c7"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 22,
+    "color": {
+      "0": "5C258D",
+      "100": "4389A2"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 23,
+    "color": {
+      "0": "134E5E",
+      "100": "71B280"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 24,
+    "color": {
+      "0": "4776E6",
+      "100": "8E54E9"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 25,
+    "color": {
+      "0": "614385",
+      "100": "516395"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 26,
+    "color": {
+      "0": "1D976C",
+      "100": "93F9B9"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 27,
+    "color": {
+      "0": "E55D87",
+      "100": "5FC3E4"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  },
+  {
+    "idx": 28,
+    "color": {
+      "0": "EDE574",
+      "100": "E1F5C4"
+    },
+    "text": "282829",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 29,
+    "color": {
+      "0": "e52d27",
+      "100": "b31217"
+    },
+    "text": "282829",
+    "textBg": "f7f5f5"
+  },
+  {
+    "idx": 30,
+    "color": {
+      "0": "5433FF",
+      "50": "20BDFF",
+      "100": "A5FECB"
+    },
+    "text": "f7f5f5",
+    "textBg": "282829"
+  }
+]
+;
+var BF_TJ={
+  "default": {
+    "color": "fffefe",
+    "text": "4f94ef",
+    "textBg": "434d58"
+  },
+  "dark": {
+    "color": "151515",
+    "text": "dadada",
+    "textBg": "9f9f9f"
+  },
+  "radical": {
+    "color": "141321",
+    "text": "d83a7c",
+    "textBg": "a9fef7"
+  },
+  "merko": {
+    "color": "0a0f0b",
+    "text": "90b302",
+    "textBg": "68b587"
+  },
+  "gruvbox": {
+    "color": "282828",
+    "text": "d8a52d",
+    "textBg": "8ec07c"
+  },
+  "gruvbox_light": {
+    "color": "fbf1c7",
+    "text": "bf8930",
+    "textBg": "427b58"
+  },
+  "tokyonight": {
+    "color": "1a1b27",
+    "text": "628fda",
+    "textBg": "38bdae"
+  },
+  "onedark": {
+    "color": "282c34",
+    "text": "c6a76e",
+    "textBg": "df6d74"
+  },
+  "cobalt": {
+    "color": "193549",
+    "text": "c576c1",
+    "textBg": "75eeb2"
+  }
+}
+;
+BF_DEPS["../src/palette.json"]=BF_PJ;
+BF_DEPS["../src/gradients.json"]=BF_GJ;
+BF_DEPS["../src/themes.json"]=BF_TJ;
+BF_DEPS["./shapes"]=(function(){var module={exports:{}};var exports=module.exports;function require(p){return BF_DEPS[p];}
+const W = 1200;
+function waveY(u, dip, h, ph) { return h - dip / 2 - (dip / 2) * Math.sin(u * Math.PI * 3 + (ph || 0)); }
+function shapeD(type, w, h, dip, ph) {
+  const f = n => +n.toFixed(1), y0 = h - dip;
+  if (type === "rect" || type === "blur") return "M0,0L" + w + ",0L" + w + "," + f(h) + "L0," + f(h) + "Z";
+  if (type === "rounded") { const r = Math.min(28, h * 0.35); return "M" + f(r) + ",0H" + f(w - r) + "Q" + w + ",0 " + w + "," + f(r) + "V" + f(h - r) + "Q" + w + "," + f(h) + " " + f(w - r) + "," + f(h) + "H" + f(r) + "Q0," + f(h) + " 0," + f(h - r) + "V" + f(r) + "Q0,0 " + f(r) + ",0Z"; }
+  if (type === "arch") return "M0,0L" + w + ",0L" + w + "," + f(y0) + "Q" + f(w / 2) + "," + f(h + dip * 0.6) + " 0," + f(y0) + "Z";
+  if (type === "slice") return "M0,0L" + w + ",0L" + w + "," + f(h - dip * 1.6) + "L0," + f(h) + "Z";
+  if (type === "egg") return "M0,0L" + w + ",0L" + w + "," + f(h - dip * 0.9) + "Q" + f(w * 0.75) + "," + f(h + dip * 0.3) + " " + f(w / 2) + "," + f(h - dip * 0.2) + "Q" + f(w * 0.25) + "," + f(h + dip * 0.3) + " 0," + f(h - dip * 0.9) + "Z";
+  if (type === "cylinder") return "M0,0L" + w + ",0L" + w + "," + f(y0) + "A" + f(w / 2) + "," + f(Math.max(1, dip)) + " 0 0 1 0," + f(y0) + "Z";
+  if (type === "soft") return "M0,0L" + w + ",0L" + w + "," + f(h - dip * 0.7) + "Q" + f(w / 2) + "," + f(h - dip * 0.2) + " 0," + f(h - dip * 0.7) + "Z";
+  if (type === "shark") return "M0,0L" + w + ",0L" + w + "," + f(h - dip * 0.5) + "L" + f(w * 0.60) + "," + f(h - dip * 0.5) + "L" + f(w * 0.47) + "," + f(Math.max(0, h - dip * 1.9)) + "L" + f(w * 0.34) + "," + f(h - dip * 0.5) + "L0," + f(h - dip * 0.5) + "L0," + f(h) + "Z";
+  if (type === "venom") { let d = "M0,0L" + w + ",0L" + w + "," + f(h - dip * 0.5); const n = 9; for (let i = n; i >= 0; i--) { const x = w * (i / n); d += "L" + f(x) + "," + f(Math.min(h, h - dip * 0.5 + dip * (i % 2 === 0 ? 0.9 : 0.12) + Math.sin(i) * dip * 0.05)); } return d + "L0," + f(h) + "Z"; }
+  if (type === "speech") return "M0,0L" + w + ",0L" + w + "," + f(y0) + "L" + f(w * 0.62) + "," + f(y0) + "L" + f(w * 0.50) + "," + f(Math.min(h, y0 + dip)) + "L" + f(w * 0.40) + "," + f(y0) + "L0," + f(y0) + "L0," + f(h) + "Z";
+  if (type === "pulse") { let d = "M0,0L" + w + ",0L" + w + "," + f(h - dip * 0.5); const s = 60; for (let i = s; i >= 0; i--) { const u = i / s; let y = h - dip * 0.5; const dd = Math.abs(u - 0.5); if (dd < 0.045) y -= dip * 1.3 * (1 - dd / 0.045); else if (dd < 0.075) y += dip * 0.25 * (1 - (dd - 0.045) / 0.03); d += "L" + f(w * u) + "," + f(Math.max(0, y)); } return d + "L0," + f(h) + "Z"; }
+  if (type === "checkered") { let d = "M0,0L" + w + ",0L" + w + "," + f(h - dip); const n = 12, sw = w / n; for (let i = 0; i < n; i++) { const x = w - i * sw, dd = (i % 2 ? dip : dip * 0.45); d += "L" + f(x) + "," + f(h - dd) + "L" + f(x - sw) + "," + f(h - dd); } return d + "L0," + f(h) + "Z"; }
+  if (type === "transparent") return "";
+  let d = "M0,0L" + w + ",0L" + w + "," + f(waveY(1, dip, h, ph || 0));
+  const s = 60; for (let i = s; i >= 0; i--) { const u = i / s; d += "L" + f(w * u) + "," + f(waveY(u, dip, h, ph || 0)); }
+  return d + "Z";
+}
+function frames(type, w, h, dip) {
+  if (type === "waving" || type === "wave") return [0, 2.09, 4.19].map(p => shapeD(type, w, h, dip, p));
+  return [shapeD(type, w, h, dip, 0)];
+}
+module.exports = { W, shapeD, frames };
+
+return module.exports;})();
+BF_DEPS["./colors"]=(function(){var module={exports:{}};var exports=module.exports;function require(p){return BF_DEPS[p];}
+const PALETTE = require("../src/palette.json");
+const GRADIENTS = require("../src/gradients.json");
+const THEMES = require("../src/themes.json");
+function hx(s) {
+  s = String(s == null ? "" : s).replace(/^#/, "");
+  if (/^[0-9a-fA-F]{3}$/.test(s)) s = s.split("").map(c => c + c).join("");
+  return /^[0-9a-fA-F]{6}$/.test(s) ? s.toUpperCase() : "000000";
+}
+function nums(v) { return String(v == null ? "" : v).split(",").map(x => parseFloat(x)).filter(x => !isNaN(x)); }
+function pickList(list, idxs) {
+  if (!idxs.length) return list;
+  return idxs.map(i => list[((Math.floor(i) % list.length) + list.length) % list.length]);
+}
+function resolveColor(q, env) {
+  const now = env && env.now != null ? env.now : Date.now();
+  const rnd = env && env.rnd ? env.rnd : Math.random;
+  const th = THEMES[String(q.theme || "").toLowerCase()];
+  if (th) {
+    if (th.color && th.color.includes && th.color.includes(",")) {
+      const parts = th.color.split(",").map(hx);
+      return { grad: true, stops: parts.map((c, i) => [parts.length === 1 ? 0 : i * 100 / (parts.length - 1), c]), font: hx(th.text) };
+    }
+    return { grad: false, bg: hx(th.color), font: hx(th.text), textBg: hx(th.textBg) };
+  }
+  const c = String(q.color == null ? "B897FF" : q.color);
+  const idxs = nums(q.customColorList);
+  const minute = Math.floor(now / 60000);
+  if (c === "auto" || c === "timeAuto") {
+    const l = pickList(PALETTE, idxs);
+    const p = c === "timeAuto" ? l[minute % l.length] : l[Math.floor(rnd() * l.length)];
+    return { grad: false, bg: hx(p.color), font: hx(p.text), textBg: hx(p.textBg) };
+  }
+  if (c === "random") return { grad: false, bg: Math.floor(rnd() * 16777215).toString(16).padStart(6, "0").toUpperCase(), font: "000000", textBg: "282829" };
+  if (c === "gradient" || c === "timeGradient") {
+    const l = pickList(GRADIENTS, idxs);
+    const g = c === "timeGradient" ? l[minute % l.length] : l[Math.floor(rnd() * l.length)];
+    const stops = Object.keys(g.color).map(k => [parseFloat(k), hx(g.color[k])]).sort((a, b) => a[0] - b[0]);
+    return { grad: true, stops: stops, font: hx(g.text), textBg: hx(g.textBg) };
+  }
+  const gm = c.match(/(\d+):#?([0-9a-fA-F]{3,6})/g);
+  if (gm && gm.length > 1) {
+    const stops = gm.map(s => { const m = s.match(/(\d+):#?([0-9a-fA-F]{3,6})/); return [parseFloat(m[1]), hx(m[2])]; }).sort((a, b) => a[0] - b[0]);
+    return { grad: true, stops: stops, font: "000000", textBg: "282829" };
+  }
+  return { grad: false, bg: hx(c), font: "000000", textBg: "282829" };
+}
+module.exports = { hx, nums, pickList, resolveColor, PALETTE, GRADIENTS, THEMES };
+
+return module.exports;})();
+BF_DEPS["./text"]=(function(){var module={exports:{}};var exports=module.exports;function require(p){return BF_DEPS[p];}
+const { hx, nums } = require("./colors");
+function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+function animWrap(a) {
+  if (a === "fadeIn") return ['<g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="1.2s" fill="freeze"/>', "</g>"];
+  if (a === "scaleIn") return ['<g style="transform-origin:center;transform-box:fill-box" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.8s" fill="freeze"/><animateTransform attributeName="transform" type="scale" from="0.6" to="1" dur="0.8s" fill="freeze"/>', "</g>"];
+  if (a === "blink") return ['<g><animate attributeName="opacity" values="1;0;1" dur="0.6s" repeatCount="indefinite"/>', "</g>"];
+  if (a === "blinking") return ['<g><animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite"/>', "</g>"];
+  if (a === "twinkling") return ['<g><animate attributeName="opacity" values="1;0.25;1" dur="4s" repeatCount="indefinite"/>', "</g>"];
+  return ["", ""];
+}
+function xFor(v, W) {
+  v = v == null ? 50 : Math.max(0, Math.min(100, v));
+  return { ax: (W * v / 100).toFixed(1), an: v <= 35 ? "start" : v >= 65 ? "end" : "middle" };
+}
+function buildCopy(q, o) {
+  const W = o.W, h = o.h;
+  const fam = esc(q.fontFamily || "Verdana");
+  const fs = Math.max(10, Math.min(300, parseInt(q.fontSize) || 70));
+  const dsfs = Math.max(8, Math.min(120, parseInt(q.descSize) || 20));
+  const font = hx(q.fontColor || o.font);
+  const stroke = hx(q.stroke || "000000"), strokeW = parseFloat(q["stroke-width"]) || 0;
+  const sk = strokeW > 0 ? " stroke=\"#" + stroke + "\" stroke-width=\"" + strokeW + "\"" : "";
+  const faX = nums(q.fontAlign), faY = nums(q.fontAlignY), dX = nums(q.descAlign), dY = nums(q.descAlignY);
+  const lines = String(q.text == null ? "" : q.text).split("-nl-");
+  const dlines = String(q.desc == null ? "" : q.desc).split("-nl-");
+  const hasDesc = dlines.length && dlines[0] !== "";
+  const baseY = faY.length ? faY[0] : 50;
+  let txt = "";
+  lines.forEach((ln, i) => {
+    if (!ln) return;
+    const x = xFor(faX.length ? faX[Math.min(i, faX.length - 1)] : 50, W);
+    let y = faY.length > 1 ? faY[Math.min(i, faY.length - 1)] : baseY + (hasDesc ? -fs * 0.32 / h * 100 : 0) + (faY.length ? 0 : (i - (lines.length - 1) / 2) * (fs * 1.15 / h * 100));
+    y = Math.max(0, Math.min(100, y));
+    const yy = (y / 100 * h).toFixed(1);
+    const bgRect = String(q.textBg || "false") === "true" ? '<rect x="0" y="' + (yy - fs * 0.62).toFixed(1) + '" width="' + W + '" height="' + (fs * 1.24).toFixed(1) + '" fill="#' + hx(o.textBg) + '" opacity="0.9"/>' : "";
+    txt += bgRect + '<text x="' + x.ax + '" y="' + yy + '" text-anchor="' + x.an + '" dominant-baseline="middle" font-family="' + fam + '" font-weight="bold" font-size="' + fs + '" fill="#' + font + '"' + sk + ">" + esc(ln) + "</text>";
+  });
+  if (hasDesc) dlines.forEach((ln, i) => {
+    if (!ln) return;
+    const x = xFor(dX.length ? dX[Math.min(i, dX.length - 1)] : 50, W);
+    const y = dY.length > 1 ? dY[Math.min(i, dY.length - 1)] : (dY.length ? dY[0] : 62);
+    txt += '<text x="' + x.ax + '" y="' + (Math.max(0, Math.min(100, y)) / 100 * h).toFixed(1) + '" text-anchor="' + x.an + '" dominant-baseline="middle" font-family="' + fam + '" font-size="' + dsfs + '" fill="#' + font + '" opacity="0.85">' + esc(ln) + "</text>";
+  });
+  const rot = parseFloat(q.rotate) || 0;
+  if (rot && txt) txt = '<g transform="rotate(' + rot + " " + (W / 2) + " " + (h / 2) + ')">' + txt + "</g>";
+  const aw = animWrap(String(q.animation || "none"));
+  return aw[0] + txt + aw[1];
+}
+module.exports = { esc, animWrap, xFor, buildCopy };
+
+return module.exports;})();
+BF_DEPS["./render"]=(function(){var module={exports:{}};var exports=module.exports;function require(p){return BF_DEPS[p];}
+const { W, shapeD, frames } = require("./shapes");
+const { resolveColor } = require("./colors");
+const { buildCopy } = require("./text");
+function render(q, env) {
+  q = q || {};
+  const type = String(q.type || "wave");
+  const h = Math.max(60, Math.min(800, parseInt(q.height) || 200));
+  const dip = Math.min(90, h * 0.35);
+  const section = String(q.section || "header");
+  const reversal = String(q.reversal || "false") === "true";
+  const col = resolveColor(q, env);
+  const gid = "g" + Math.floor(Math.random() * 1e9);
+  const defs = col.grad ? '<linearGradient id="' + gid + '" x1="0" y1="0" x2="1" y2="0">' + col.stops.map(s => '<stop offset="' + (s[0] / 100) + '" stop-color="#' + s[1] + '"/>').join("") + "</linearGradient>" : null;
+  const fill = col.grad ? "url(#" + gid + ")" : "#" + col.bg;
+  let bg = "";
+  if (type !== "transparent") {
+    const fr = frames(type, W, h, dip);
+    bg = '<path d="' + fr[0] + '" fill="' + fill + '"' + (type === "blur" ? ' filter="url(#bfblur)"' : "") + ">" + (fr.length > 1 ? '<animate attributeName="d" values="' + fr.join(";") + '" dur="3s" repeatCount="indefinite"/>' : "") + "</path>";
+  }
+  let inner = bg + (defs || "");
+  if (section === "footer" && bg) inner = '<g transform="translate(0,' + h + ') scale(1,-1)">' + bg + "</g>" + (defs || "");
+  if (reversal && bg) inner = '<g transform="translate(' + W + ',0) scale(-1,1)">' + inner + "</g>";
+  const copy = buildCopy(q, { W: W, h: h, font: col.font, textBg: col.textBg });
+  const blurDef = type === "blur" ? '<filter id="bfblur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="10"/></filter>' : "";
+  return '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + h + '" viewBox="0 0 ' + W + " " + h + '"><defs>' + (defs || "") + blurDef + "</defs>" + inner + copy + "</svg>";
+}
+module.exports = { render, W };
+
+return module.exports;})();
+window.BFRender=BF_DEPS["./render"];
+</script>
+<script>
+(function(){
+var q={};new URLSearchParams(location.search).forEach(function(v,k){q[k]=v;});
+var svg="";
+try{svg=window.BFRender.render(q);}catch(e){svg="";}
+if(!svg){document.getElementById("note").textContent="No banner params. Try ?type=waving&color=auto&height=300&text=Hello%20World&fontSize=90";return;}
+document.getElementById("stage").innerHTML=svg;
+document.getElementById("note").innerHTML="Preview only. Pages serves static files, so this URL cannot be embedded as an image. For embeddable <code>&lt;img&gt;</code> URLs use the Vercel API — or download the SVG below and commit it next to your README.";
+var dlB=document.getElementById("dl");
+dlB.onclick=function(){var b=new Blob([svg],{type:"image/svg+xml"});var u=URL.createObjectURL(b);var a=document.createElement("a");a.href=u;a.download="banner.svg";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},4000);};
+var lkB=document.getElementById("lk");
+lkB.onclick=function(){var done=function(){lkB.textContent="Copied";setTimeout(function(){lkB.textContent="Copy link";},1500);};if(navigator.clipboard)navigator.clipboard.writeText(location.href).then(done,done);};
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+$meta
+  title = Nort-Sun GitHub Banner Forge
+  description = Nort-Sun GitHub Banner Forge — pick a shape, palette, and font, then export a crisp PNG.
+  tags = banner, github, readme, design tool, canvas
+
+generateText = {import:ai-text-plugin}
+
+palette
+  Ocean | #0f2027, #203a43, #2c5364
+  Sunrise | #080c14, #c2410c, #f97316
+  Synthwave | #1a0933, #6b1e8c, #ff2e88
+  Forest | #0b1f14, #1f5c3a, #4caf7d
+  Mono | #0d0d0d, #2b2b2b, #4a4a4a
+  Berry | #1b0b2e, #5c1a6b, #c026d3
+  Deep Space | #050816, #1e1b4b, #0ea5e9
+  Mint | #06251c, #0d9488, #5eead4
+  Ember | #1a0a0a, #7c2d12, #fbbf24
+  Grape Soda | #17082e, #7c3aed, #f0abfc
+
+shapeName
+  wave
+  doubleWave
+  arch
+  slice
+  zigzag
+  rounded
+  peak
+  scallop
+  drip
+  steps
+  chevron
+  mountains
+  skyline
+  egg
+  cylinder
+  vibration
+  aurora
+  transparent
+  straight
+  rect
+  soft
+  waving
+  shark
+  venom
+  speech
+  blur
+  pulse
+  checkered
+
+fontOption
+  Space Grotesk | 'Space Grotesk',sans-serif | 700
+  Poppins | 'Poppins',sans-serif | 600
+  Inter | 'Inter',sans-serif | 800
+  Orbitron | 'Orbitron',sans-serif | 900
+  Bebas Neue | 'Bebas Neue',sans-serif | 400
+  Playfair Display | 'Playfair Display',serif | 700
+  JetBrains Mono | 'JetBrains Mono',monospace | 600
+  Fira Code | 'Fira Code',monospace | 600
