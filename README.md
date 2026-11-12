@@ -1,4 +1,5 @@
 # Nort-Sun GitHub Banner Forge
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M8K423K344)
 <p align="center">
   <img src="https://banner-forge-api.vercel.app/api?type=waving&color=0%3A050816%2C100%3A0ea5e9&height=220&section=header&text=Nort-Sun+GitHub+Banner+Forge&fontSize=44&fontAlign=50&fontAlignY=50&fontColor=ffffff&fontFamily=Orbitron" alt="Header banner" width="100%"/>
 </p>
